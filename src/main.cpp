@@ -25,6 +25,7 @@ void setup() {
   while (firstClick == false){
     Serial.print("...");
   }
+  //TEST
   Serial.println("Success after:");
   Serial.print(millis() + "ms");
 }
