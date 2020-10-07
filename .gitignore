@@ -8,9 +8,10 @@
 .clang_complete
 .gcc-flags.json
 .pio
+test
 
 ### VisualStudioCode ###
-.vscode/*
+.vscode
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
