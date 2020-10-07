@@ -7,6 +7,7 @@ int clicks;
 bool firstClick = false;
 int CPM;
 float uSv;
+float roentgen;
 float MAXIMUM_TOLERANCE = 7.0;
 
 void onClick();
@@ -14,6 +15,8 @@ void displayToPlotter();
 void toSievert();
 void wait();
 void redAlert();
+void toRoentgen();
+
 unsigned long previousMillis = millis();
 unsigned long currentMillis = millis();
 
@@ -38,6 +41,7 @@ void loop() {
   CPM = clicks;
   clicks = 0;
   toSievert();
+  toRoentgen();
 }
 
 void onClick(){
@@ -47,7 +51,7 @@ void onClick(){
 
 void toSievert(){
   uSv = CPM * 0.00812037037037;
-  Serial.print("Current uSv: ");
+  Serial.print("Current uSv/h: ");
   Serial.println(uSv);
   if (uSv >= MAXIMUM_TOLERANCE){
     redAlert();
@@ -55,12 +59,16 @@ void toSievert(){
 }
 
 void redAlert(){
-  detachInterrupt(digitalPinToInterrupt(clickPin));
   Serial.println();
   Serial.print("The highest tolerance of, ");
   Serial.print(MAXIMUM_TOLERANCE);
   Serial.print(" uSv/h has been reached!");
   Serial.println();
-  Serial.println("LEAVE THE AREA IMMEDIATELY THIS GEIGERCOUNTER WILL NOW HALT!");
-  yield();
+  Serial.println("LEAVE THE AREA IMMEDIATELY!");
+}
+
+void toRoentgen(){
+  roentgen = uSv / 10000;
+  Serial.print("Current Roentgen/h");
+  Serial.println("roentgen");
 }
