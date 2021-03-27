@@ -15,9 +15,9 @@ void displayToPlotter();
 void toSievert();
 void wait();
 void redAlert();
-void toRoentgen();
+void showCPM();
 
-unsigned long previousMillis = millis();
+unsigned long previousMillis;
 unsigned long currentMillis = millis();
 
 void setup() {
@@ -29,19 +29,23 @@ void setup() {
     Serial.print("...");
   }
   //TEST
-  Serial.println("Success after:");
-  Serial.print(millis() + "ms");
+  Serial.println();
+  Serial.print("Success after:");
+  Serial.println(String(millis()) + "ms");
+  Serial.println();
 }
 
 void loop() {
-  currentMillis = millis();
+  previousMillis = currentMillis;
   while (currentMillis - previousMillis <= 60000){
-    //Do nothing because the interrupt handles the clicks.
+    currentMillis = millis();
   }
   CPM = clicks;
   clicks = 0;
+  Serial.println("-------------------RESULTS OF THE LAST MINUTE-------------------");
+  showCPM();
   toSievert();
-  toRoentgen();
+  Serial.println("----------------------------------------------------------------");
 }
 
 void onClick(){
@@ -51,8 +55,10 @@ void onClick(){
 
 void toSievert(){
   uSv = CPM * 0.00812037037037;
+  Serial.println();
   Serial.print("Current uSv/h: ");
   Serial.println(uSv);
+  Serial.println();
   if (uSv >= MAXIMUM_TOLERANCE){
     redAlert();
   }
@@ -67,8 +73,9 @@ void redAlert(){
   Serial.println("LEAVE THE AREA IMMEDIATELY!");
 }
 
-void toRoentgen(){
-  roentgen = uSv / 10000;
-  Serial.print("Current Roentgen/h");
-  Serial.println("roentgen");
+void showCPM(){
+  Serial.println();
+  Serial.print("Current CPM: ");
+  Serial.println(CPM);
+  Serial.println();
 }
