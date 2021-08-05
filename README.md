@@ -34,4 +34,4 @@ Then the CPM (Counts per minute) get converted to uSv/h and R/h.
 
 The output units are:
 - Microsievert per hour
-- Röntgen per hour
+- Counts per Minute
