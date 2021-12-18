@@ -12,8 +12,7 @@ Simple arduino translator for J305 based geiger counters (For example: Radiation
 
 SerialGeiger is a VERY simple interface for your Arduino to
 a Geiger Counter equipped with a J305ß Geiger Müller tube.
-It converts the counts per minute of the Counter to Microsieverts/h and
-Roentgen/h.
+It converts the counts per minute of the Counter to Microsieverts/h.
 
 ## Why would you want to use SerialGeiger?
 
@@ -28,7 +27,7 @@ your Geiger counter to an ISR Pin on your Arduino. (In this case it's PIN 2 on t
 ## How does it work?
 
 The program waits for falling edge voltages on the ISR pin and counts the clicks like that.
-Then the CPM (Counts per minute) get converted to uSv/h and R/h.
+Then the CPM (Counts per minute) get converted to uSv/h.
 
 ## What are the output units?
 
